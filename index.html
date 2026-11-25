@@ -1,683 +1,632 @@
-
 <!DOCTYPE html>
 <html lang="pl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#09090d">
 <title>blurry. — your space on the internet</title>
-<meta name="theme-color" content="#08080b">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
-
-:root {
-  --bg:#08080b;
-  --panel:#101014;
-  --panel2:#15151b;
-  --border:rgba(255,255,255,.075);
-  --text:#f5f5f7;
-  --muted:#85858f;
-  --accent:#a78bfa;
-}
-
-*{box-sizing:border-box;margin:0;padding:0}
-
-body{
-  background:var(--bg);
-  color:var(--text);
-  font-family:Inter,sans-serif;
-  min-height:100vh;
-  overflow-x:hidden;
-}
-
-body:before{
-  content:"";
-  position:fixed;
-  width:650px;
-  height:650px;
-  background:radial-gradient(circle,rgba(132,94,255,.12),transparent 70%);
-  top:-350px;
-  left:50%;
-  transform:translateX(-50%);
-  pointer-events:none;
-  z-index:-1;
-}
-
-button,input{font:inherit}
-
-nav{
-  height:76px;
-  max-width:1200px;
-  margin:auto;
-  padding:0 25px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  border-bottom:1px solid var(--border);
-}
-
-.logo{
-  font-size:25px;
-  font-weight:900;
-  letter-spacing:-1.8px;
-  color:white;
-}
-
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800;900&display=swap');
+:root{--bg:#09090d;--panel:#111117;--panel2:#171720;--line:#292934;--muted:#9292a0;--text:#f5f5f8;--accent:#a78bfa}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:14px 'DM Sans',sans-serif;min-height:100vh}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+.hidden{display:none!important}
+.top{height:68px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 28px;position:sticky;top:0;background:#09090def;backdrop-filter:blur(18px);z-index:20}
+.logo{font-size:25px;font-weight:900;letter-spacing:-1.8px}
 .logo span{color:var(--accent)}
-
-.navlinks{
-  display:flex;
-  gap:30px;
-  align-items:center;
-}
-
-.navlinks a{
-  text-decoration:none;
-  color:#9999a3;
-  font-size:13px;
-  transition:.2s;
-}
-
-.navlinks a:hover{color:white}
-
-.navbutton{
-  background:white;
-  color:black!important;
-  padding:11px 17px;
-  border-radius:9px;
-  font-weight:700;
-}
-
-.hero{
-  max-width:1200px;
-  margin:0 auto;
-  padding:105px 25px 80px;
-  display:grid;
-  grid-template-columns:1fr 440px;
-  align-items:center;
-  gap:70px;
-}
-
-.tag{
-  display:inline-flex;
-  align-items:center;
-  gap:9px;
-  border:1px solid var(--border);
-  background:rgba(255,255,255,.025);
-  border-radius:30px;
-  padding:8px 13px;
-  color:#aaaab5;
-  font-size:11px;
-  margin-bottom:25px;
-}
-
-.dot{
-  width:7px;height:7px;
-  background:#8bdbab;
-  border-radius:50%;
-  box-shadow:0 0 12px #8bdbab;
-}
-
-h1{
-  font-size:clamp(52px,7vw,82px);
-  line-height:.99;
-  letter-spacing:-5px;
-  font-weight:900;
-  max-width:600px;
-}
-
-h1 span{
-  color:var(--accent);
-}
-
-.description{
-  color:#92929e;
-  font-size:15px;
-  line-height:1.8;
-  max-width:460px;
-  margin-top:25px;
-}
-
-.actions{
-  display:flex;
-  gap:12px;
-  margin-top:30px;
-  flex-wrap:wrap;
-}
-
-.btn{
-  border:1px solid var(--border);
-  border-radius:10px;
-  padding:14px 20px;
-  background:#17171e;
-  color:white;
-  cursor:pointer;
-  font-weight:700;
-  font-size:13px;
-  transition:.25s;
-}
-
-.btn:hover{
-  transform:translateY(-3px);
-  border-color:#ffffff45;
-}
-
-.btn.primary{
-  background:white;
-  color:#08080b;
-  border-color:white;
-}
-
-.btn.primary:hover{
-  background:var(--accent);
-  border-color:var(--accent);
-}
-
-.hero-note{
-  margin-top:20px;
-  font-size:11px;
-  color:#666671;
-}
-
-/* PROFILE */
-
-.profile-wrap{
-  position:relative;
-}
-
-.profile-glow{
-  position:absolute;
-  width:300px;height:300px;
-  background:var(--accent);
-  opacity:.14;
-  filter:blur(100px);
-  top:50%;left:50%;
-  transform:translate(-50%,-50%);
-  pointer-events:none;
-}
-
-.profile{
-  position:relative;
-  border:1px solid rgba(255,255,255,.12);
-  border-radius:17px;
-  overflow:hidden;
-  background:#111116;
-  box-shadow:0 25px 100px #0009;
-  transition:.3s;
-}
-
-.profile-cover{
-  height:145px;
-  background:
-    linear-gradient(130deg,#25202f,#12121b 55%,#30244b);
-  position:relative;
-  overflow:hidden;
-}
-
-.profile-cover:before{
-  content:"";
-  position:absolute;
-  width:250px;height:250px;
-  border:1px solid #ffffff20;
-  border-radius:50%;
-  top:-120px;right:-40px;
-  box-shadow:0 0 0 30px #ffffff08,0 0 0 60px #ffffff05;
-}
-
-.profile-cover:after{
-  content:"";
-  position:absolute;
-  width:170px;height:170px;
-  background:var(--accent);
-  opacity:.35;
-  filter:blur(65px);
-  left:20px;top:30px;
-}
-
-.profile-content{
-  padding:0 24px 24px;
-  margin-top:-42px;
-  position:relative;
-}
-
-.avatar{
-  width:82px;height:82px;
-  border:5px solid #111116;
-  border-radius:50%;
-  background:linear-gradient(135deg,#b9a2ff,#4b387a);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:29px;
-  font-weight:900;
-  overflow:hidden;
-}
-
-.avatar img{
-  width:100%;height:100%;
-  object-fit:cover;
-}
-
-.username{
-  font-size:22px;
-  font-weight:800;
-  margin-top:12px;
-  letter-spacing:-.8px;
-}
-
-.handle{
-  color:#777783;
-  font-size:12px;
-  margin-top:4px;
-}
-
-.bio{
-  color:#b4b4be;
-  font-size:12px;
-  line-height:1.7;
-  margin-top:15px;
-}
-
-.profile-stats{
-  display:flex;
-  gap:20px;
-  margin-top:19px;
-  font-size:11px;
-  color:#777783;
-}
-
-.profile-stats b{color:white}
-
-.profile-links{
-  display:grid;
-  gap:9px;
-  margin-top:20px;
-}
-
-.profile-link{
-  padding:12px 14px;
-  border:1px solid var(--border);
-  border-radius:9px;
-  background:#ffffff04;
-  font-size:12px;
-  font-weight:600;
-  color:#dddde5;
-  display:flex;
-  justify-content:space-between;
-}
-
-.profile-footer{
-  border-top:1px solid var(--border);
-  padding:14px 20px;
-  text-align:center;
-  color:#555560;
-  font-size:10px;
-  letter-spacing:1px;
-}
-
-/* SECTIONS */
-
-.section{
-  max-width:1200px;
-  margin:auto;
-  padding:70px 25px;
-}
-
-.section-title{
-  font-size:30px;
-  font-weight:800;
-  letter-spacing:-1.5px;
-}
-
-.section-desc{
-  color:var(--muted);
-  font-size:13px;
-  margin-top:10px;
-  line-height:1.7;
-}
-
-.features{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:15px;
-  margin-top:35px;
-}
-
-.feature{
-  padding:25px;
-  border:1px solid var(--border);
-  border-radius:13px;
-  background:linear-gradient(145deg,#111116,#0d0d11);
-  transition:.25s;
-}
-
-.feature:hover{
-  border-color:#ffffff25;
-  transform:translateY(-4px);
-}
-
-.feature-icon{
-  width:40px;height:40px;
-  display:grid;
-  place-items:center;
-  border-radius:10px;
-  background:#ffffff09;
-  font-size:19px;
-  margin-bottom:20px;
-}
-
-.feature h3{
-  font-size:15px;
-  margin-bottom:9px;
-}
-
-.feature p{
-  color:#85858f;
-  font-size:12px;
-  line-height:1.8;
-}
-
-/* EDITOR */
-
-.editor{
-  max-width:1200px;
-  margin:20px auto 80px;
-  padding:0 25px;
-}
-
-.editor-box{
-  border:1px solid var(--border);
-  background:#101014;
-  border-radius:15px;
-  padding:28px;
-}
-
-.editor-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:25px;
-  margin-top:25px;
-}
-
-.field{
-  margin-bottom:17px;
-}
-
-.field label{
-  display:block;
-  font-size:11px;
-  color:#a0a0aa;
-  margin-bottom:9px;
-}
-
-.field input{
-  width:100%;
-  padding:13px;
-  background:#08080c;
-  border:1px solid var(--border);
-  color:white;
-  border-radius:8px;
-  outline:none;
-  font-size:12px;
-}
-
-.field input:focus{
-  border-color:var(--accent);
-}
-
-.colors{
-  display:flex;
-  gap:10px;
-}
-
-.color{
-  width:27px;height:27px;
-  border-radius:50%;
-  border:2px solid transparent;
-  cursor:pointer;
-}
-
-.color.active{
-  outline:2px solid white;
-  outline-offset:3px;
-}
-
-footer{
-  border-top:1px solid var(--border);
-  padding:30px 25px;
-  text-align:center;
-  color:#555560;
-  font-size:11px;
-}
-
-footer b{color:#aaaab5}
-
-@media(max-width:850px){
-  .hero{
-    grid-template-columns:1fr;
-    gap:55px;
-    padding-top:75px;
-  }
-  .profile-wrap{max-width:440px;width:100%;margin:auto}
-  .features{grid-template-columns:1fr 1fr}
-}
-
-@media(max-width:550px){
-  .navlinks{gap:14px}
-  .navlinks a{font-size:11px}
-  .navlinks a:nth-child(1){display:none}
-  h1{letter-spacing:-3px}
-  .features{grid-template-columns:1fr}
-  .editor-grid{grid-template-columns:1fr}
-  .editor-box{padding:18px}
-  .hero{padding-top:65px}
-}
+.topright{display:flex;gap:10px;align-items:center}
+.pill{border:1px solid var(--line);border-radius:9px;padding:9px 13px;color:#c6c6d0;background:#111117;font-size:12px}
+.shell{max-width:1440px;margin:auto;display:grid;grid-template-columns:225px 1fr;min-height:calc(100vh - 68px)}
+aside{border-right:1px solid var(--line);padding:25px 14px;position:sticky;top:68px;height:calc(100vh - 68px)}
+.side-label{font-size:10px;color:#656573;font-weight:800;letter-spacing:1.4px;padding:12px 12px 8px}
+.navbtn{display:flex;align-items:center;gap:12px;width:100%;border:0;background:transparent;color:#a2a2ae;padding:12px;border-radius:9px;text-align:left;font-size:13px;margin:2px 0}
+.navbtn:hover,.navbtn.active{background:#1b1b25;color:white}
+.navbtn.active{box-shadow:inset 2px 0 var(--accent)}
+.navbtn i{font-style:normal;width:18px;text-align:center;font-size:16px}
+main{padding:34px;min-width:0}
+.page{display:none}
+.page.active{display:block}
+.heading{display:flex;justify-content:space-between;gap:15px;align-items:flex-start;margin-bottom:25px}
+.heading h1{font-size:27px;letter-spacing:-1.2px;margin:0 0 7px}
+.sub{color:var(--muted);font-size:12px;line-height:1.7}
+.btn{border:1px solid var(--line);background:#191922;color:#eee;padding:10px 14px;border-radius:9px;font-size:12px;font-weight:700}
+.btn:hover{border-color:#555568;transform:translateY(-1px)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#09090d}
+.btn.danger{color:#ff9292}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:19px}
+.grid{display:grid;gap:14px}
+.stats{grid-template-columns:repeat(4,1fr);margin-bottom:18px}
+.stat small{display:block;color:var(--muted);font-size:11px}
+.stat strong{display:block;font-size:25px;margin-top:8px}
+.dashgrid{grid-template-columns:1.2fr .8fr}
+.profile-mini{display:flex;align-items:center;gap:14px}
+.avatar-mini{width:49px;height:49px;border-radius:50%;background:var(--accent);display:grid;place-items:center;font-weight:900;font-size:18px;overflow:hidden}
+.avatar-mini img{width:100%;height:100%;object-fit:cover}
+.muted{color:var(--muted)}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.between{justify-content:space-between}
+.field{margin:13px 0}
+.field label{display:block;color:#aaaab7;font-size:11px;font-weight:700;margin-bottom:7px}
+.input,textarea,select{width:100%;background:#0b0b10;border:1px solid #30303b;border-radius:8px;padding:11px 12px;color:#f4f4f7;outline:none;font-size:12px}
+.input:focus,textarea:focus,select:focus{border-color:var(--accent)}
+textarea{min-height:75px;resize:vertical}
+.hint{font-size:10px;color:#777784;margin-top:6px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.three{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.editor-layout{display:grid;grid-template-columns:minmax(0,1fr) 390px;gap:18px;align-items:start}
+.preview-sticky{position:sticky;top:90px}
+.sectionbox{border:1px solid var(--line);border-radius:12px;margin-bottom:13px;overflow:hidden;background:var(--panel)}
+.sectionhead{padding:15px 17px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:800}
+.sectionbody{padding:15px 17px}
+.switchrow{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid #ffffff0a;font-size:12px;color:#d4d4dc}
+.switchrow:last-child{border:0}
+.switch{appearance:none;width:34px;height:19px;background:#343440;border-radius:20px;position:relative;cursor:pointer;flex:none}
+.switch:checked{background:var(--accent)}
+.switch:before{content:'';position:absolute;width:13px;height:13px;background:white;border-radius:50%;top:3px;left:3px;transition:.18s}
+.switch:checked:before{left:18px;background:#111}
+.range{width:100%;accent-color:var(--accent)}
+.profile{--pbg:#14141c;position:relative;background:var(--pbg);border:1px solid #ffffff20;border-radius:15px;overflow:hidden;box-shadow:0 15px 60px #0008;color:var(--text);transition:.2s}
+.cover{height:125px;background:linear-gradient(125deg,#302448,#15151d 60%,#3d315a);background-size:cover;background-position:center;position:relative}
+.cover video{width:100%;height:100%;object-fit:cover}
+.profile-content{padding:0 22px 21px;margin-top:-38px;position:relative}
+.pavatar{width:76px;height:76px;border:5px solid var(--pbg);border-radius:50%;background:var(--accent);display:grid;place-items:center;font-size:25px;font-weight:900;overflow:hidden}
+.pavatar img{width:100%;height:100%;object-fit:cover}
+.pname{font-size:21px;font-weight:900;letter-spacing:-.6px;margin-top:11px}
+.puser{font-size:11px;color:#a3a3b0;margin-top:3px}
+.pbio{font-size:12px;line-height:1.65;color:#d0d0d8;margin-top:13px;white-space:pre-wrap}
+.badges{display:flex;gap:5px;flex-wrap:wrap;margin-top:10px}
+.badge{font-size:9px;border:1px solid #ffffff24;background:#ffffff0b;border-radius:5px;padding:4px 7px;color:#ddd}
+.socials{display:grid;gap:8px;margin-top:16px}
+.social{display:flex;align-items:center;justify-content:space-between;background:#ffffff0b;border:1px solid #ffffff13;border-radius:8px;padding:11px 12px;font-size:11px;text-decoration:none}
+.social:hover{border-color:var(--accent)}
+.pstats{display:flex;gap:14px;color:#999;font-size:10px;margin-top:13px}
+.pstats b{color:white}
+.audio{width:100%;margin-top:14px;height:32px}
+.widget{margin-top:12px;padding:12px;border:1px solid #ffffff18;border-radius:9px;background:#ffffff08;font-size:11px}
+.tabbar{display:flex;gap:7px;margin-top:13px}
+.tabbar button{background:#ffffff0b;color:#ddd;border:1px solid #ffffff16;padding:7px 10px;border-radius:7px;font-size:10px}
+.tabbar button.active{background:var(--accent);color:#111}
+.profile-footer{text-align:center;border-top:1px solid #ffffff14;padding:12px;color:#777;font-size:9px;letter-spacing:1px}
+.links-list{display:grid;gap:8px}
+.linkrow{display:grid;grid-template-columns:1fr 1.5fr auto;gap:8px;align-items:center}
+.linkrow .input{min-width:0}
+.linkrow button{padding:9px}
+.notice{padding:12px 14px;border:1px solid #705e9a;background:#a78bfa12;border-radius:9px;color:#cfc2ff;font-size:11px;line-height:1.6;margin-bottom:16px}
+.colorrow{display:flex;gap:8px;align-items:center}
+.file{font-size:11px;color:#aaa}
+.template{border:1px solid var(--line);border-radius:10px;padding:13px;cursor:pointer;background:#15151d}
+.template:hover{border-color:var(--accent)}
+.template-art{height:65px;border-radius:7px;margin-bottom:10px;background:linear-gradient(135deg,#2c2443,#111 60%,#62508d)}
+.template strong{font-size:12px}
+.template small{display:block;color:var(--muted);font-size:10px;margin-top:4px}
+.searchbar{max-width:500px}
+.profilecard{display:flex;align-items:center;gap:13px}
+.profilecard .avatar-mini{flex:none}
+.empty{text-align:center;padding:45px 15px;color:var(--muted)}
+.toast{position:fixed;bottom:22px;left:50%;transform:translate(-50%,20px);background:#eee;color:#111;padding:11px 17px;border-radius:9px;font-size:12px;font-weight:700;opacity:0;transition:.25s;z-index:99;pointer-events:none}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+body.fx-snow:after{content:'✦  ·  ✧     ·   ✦       ✧   ·';position:fixed;inset:0;pointer-events:none;opacity:.15;letter-spacing:40px;line-height:100px;animation:drift 18s linear infinite;z-index:5}
+@keyframes drift{to{transform:translateY(100px)}}
+body.fx-grid{background-image:linear-gradient(#ffffff08 1px,transparent 1px),linear-gradient(90deg,#ffffff08 1px,transparent 1px);background-size:35px 35px}
+@media(max-width:1000px){.editor-layout{grid-template-columns:1fr}.preview-sticky{position:static;max-width:440px;width:100%;margin:auto}.stats{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:720px){.shell{grid-template-columns:1fr}aside{position:static;height:auto;border-right:0;border-bottom:1px solid var(--line);padding:8px;display:flex;overflow:auto}.side-label{display:none}.navbtn{width:auto;white-space:nowrap;padding:10px}.navbtn i{display:none}main{padding:20px 14px}.top{padding:0 15px}.heading{align-items:center}.heading h1{font-size:23px}.dashgrid{grid-template-columns:1fr}.two,.three{grid-template-columns:1fr}.linkrow{grid-template-columns:1fr 1fr}.linkrow button{grid-column:2}.topright .pill{display:none}}
 </style>
 </head>
 <body>
+<header class="top">
+<div class="logo">blurry<span>.</span></div>
+<div class="topright"><span class="pill">DEMO MODE · LOCAL</span><button class="btn primary" id="topCreate">＋ Create profile</button></div>
+</header>
 
-<nav>
-  <div class="logo">blurry<span>.</span></div>
-  <div class="navlinks">
-    <a href="#features">Features</a>
-    <a href="#editor">Preview</a>
-    <a href="#about">About</a>
-    <a href="#editor" class="navbutton">Try blurry ↗</a>
-  </div>
-</nav>
+<div class="shell">
+<aside>
+<div class="side-label">WORKSPACE</div>
+<button class="navbtn active" data-page="home"><i>⌂</i> Overview</button>
+<button class="navbtn" data-page="profiles"><i>◉</i> My profiles</button>
+<button class="navbtn" data-page="editor"><i>✳</i> Customize</button>
+<button class="navbtn" data-page="discover"><i>⌕</i> Discover</button>
+<div class="side-label">PREFERENCES</div>
+<button class="navbtn" data-page="templates"><i>▦</i> Templates</button>
+<button class="navbtn" data-page="settings"><i>⚙</i> Settings</button>
+</aside>
 
 <main>
-<section class="hero">
-  <div>
-    <div class="tag">
-      <span class="dot"></span>
-      A new way to express yourself
-    </div>
-
-    <h1>Your space.<br>Your <span>identity.</span></h1>
-
-    <p class="description">
-      One page. Everything about you.
-      Create a personal space on the internet
-      and show the world who you are.
-      Your style, your links, your rules.
-    </p>
-
-    <div class="actions">
-      <button class="btn primary" onclick="document.querySelector('#editor').scrollIntoView({behavior:'smooth'})">
-        Explore blurry ↗
-      </button>
-      <button class="btn" onclick="document.querySelector('#features').scrollIntoView({behavior:'smooth'})">
-        Discover more
-      </button>
-    </div>
-
-    <div class="hero-note">
-      NO LIMITS. JUST YOU.
-    </div>
-  </div>
-
-  <div class="profile-wrap">
-    <div class="profile-glow"></div>
-    <div class="profile">
-      <div class="profile-cover"></div>
-      <div class="profile-content">
-        <div class="avatar" id="avatar">b.</div>
-        <div class="username" id="previewName">blurry user</div>
-        <div class="handle" id="previewHandle">@blurry</div>
-        <div class="bio" id="previewBio">
-          just another person on the internet.<br>
-          welcome to my little corner.
-        </div>
-        <div class="profile-stats">
-          <span><b>03</b> links</span>
-          <span><b>∞</b> possibilities</span>
-        </div>
-        <div class="profile-links">
-          <div class="profile-link">Instagram <span>↗</span></div>
-          <div class="profile-link">Discord <span>↗</span></div>
-          <div class="profile-link">My website <span>↗</span></div>
-        </div>
-      </div>
-      <div class="profile-footer">POWERED BY BLURRY.</div>
-    </div>
-  </div>
+<section class="page active" id="page-home">
+<div class="heading"><div><h1>Overview</h1><div class="sub">Welcome to your blurry. workspace.</div></div><button class="btn primary" id="createBtn">＋ New profile</button></div>
+<div class="grid stats">
+<div class="card stat"><small>Your profiles</small><strong id="statProfiles">0</strong></div>
+<div class="card stat"><small>Total views (demo)</small><strong id="statViews">0</strong></div>
+<div class="card stat"><small>Links created</small><strong id="statLinks">0</strong></div>
+<div class="card stat"><small>Badges</small><strong id="statBadges">0</strong></div>
+</div>
+<div class="grid dashgrid">
+<div class="card"><div class="row between"><b>Recent profiles</b><button class="btn" data-goto="profiles">View all ↗</button></div><div id="recentProfiles" style="margin-top:18px"></div></div>
+<div class="card"><b>Quick start</b><p class="sub" style="margin:10px 0 17px">Create a profile, customize its appearance and add your socials.</p><button class="btn primary" style="width:100%" id="quickCreate">Create your first profile ↗</button><div class="notice" style="margin:16px 0 0">This is a local demo. Profiles and uploaded assets are stored in this browser only. Clear site data and they may be lost.</div></div>
+</div>
 </section>
 
-<section class="section" id="features">
-  <div class="section-title">Everything in one place.</div>
-  <div class="section-desc">
-    Your personal page should feel like you.
-    Not like everybody else's.
-  </div>
-
-  <div class="features">
-    <div class="feature">
-      <div class="feature-icon">◈</div>
-      <h3>Your identity</h3>
-      <p>Build a page that represents you. Your name, avatar, bio and personal style.</p>
-    </div>
-    <div class="feature">
-      <div class="feature-icon">⌁</div>
-      <h3>Your links</h3>
-      <p>Keep all your important social links and websites in one simple place.</p>
-    </div>
-    <div class="feature">
-      <div class="feature-icon">✳</div>
-      <h3>Your aesthetic</h3>
-      <p>Colors, backgrounds and visual details. Make your profile recognizable.</p>
-    </div>
-    <div class="feature">
-      <div class="feature-icon">◉</div>
-      <h3>Minimal design</h3>
-      <p>No unnecessary clutter. Just your content and a clean experience.</p>
-    </div>
-    <div class="feature">
-      <div class="feature-icon">↗</div>
-      <h3>One destination</h3>
-      <p>Share one address instead of sending people ten different links.</p>
-    </div>
-    <div class="feature">
-      <div class="feature-icon">⌘</div>
-      <h3>Made for you</h3>
-      <p>A space on the internet where your personality comes first.</p>
-    </div>
-  </div>
+<section class="page" id="page-profiles">
+<div class="heading"><div><h1>My profiles</h1><div class="sub">Manage your locally saved profile drafts.</div></div><button class="btn primary" id="profilesCreate">＋ Create profile</button></div>
+<div id="profilesList" class="grid"></div>
 </section>
 
-<section class="editor" id="editor">
-  <div class="editor-box">
-    <div class="section-title">Live preview.</div>
-    <div class="section-desc">
-      Try changing the demo profile. Changes appear instantly.
-    </div>
+<section class="page" id="page-editor">
+<div class="heading"><div><h1>Customize profile</h1><div class="sub">Make your page yours. Changes are saved locally.</div></div><div class="row"><button class="btn" id="discard">Reset preview</button><button class="btn primary" id="saveProfile">Save changes</button></div></div>
+<div id="noProfile" class="card empty">You don't have a profile yet.<br><br><button class="btn primary" id="createFromEditor">＋ Create profile</button></div>
+<div id="editorContent" class="editor-layout hidden">
+<div>
+<div class="notice">Demo limitation: uploads are stored in this browser. Very large images, videos or audio files may exceed browser storage. For public profiles, a backend and file storage will be needed.</div>
 
-    <div class="editor-grid">
-      <div>
-        <div class="field">
-          <label>DISPLAY NAME</label>
-          <input id="nameInput" value="blurry user" maxlength="30">
-        </div>
-        <div class="field">
-          <label>USERNAME</label>
-          <input id="handleInput" value="blurry" maxlength="20">
-        </div>
-        <div class="field">
-          <label>BIO</label>
-          <input id="bioInput" value="just another person on the internet." maxlength="100">
-        </div>
-        <div class="field">
-          <label>ACCENT COLOR</label>
-          <div class="colors">
-            <button class="color active" style="background:#a78bfa" data-color="#a78bfa"></button>
-            <button class="color" style="background:#8bafff" data-color="#8bafff"></button>
-            <button class="color" style="background:#f18bb9" data-color="#f18bb9"></button>
-            <button class="color" style="background:#8bdbab" data-color="#8bdbab"></button>
-            <button class="color" style="background:#f2bd77" data-color="#f2bd77"></button>
-            <button class="color" style="background:#ffffff" data-color="#ffffff"></button>
-          </div>
-        </div>
-      </div>
+<div class="sectionbox"><div class="sectionhead">01 · Basic information</div><div class="sectionbody">
+<div class="two"><div class="field"><label>DISPLAY NAME</label><input class="input" id="fName" maxlength="40"></div><div class="field"><label>USERNAME / PROFILE URL</label><input class="input" id="fUser" maxlength="24" placeholder="yourname"></div></div>
+<div class="field"><label>DESCRIPTION / BIO</label><textarea id="fBio" maxlength="400" placeholder="Tell the world about yourself..."></textarea></div>
+<div class="two"><div class="field"><label>LOCATION</label><input class="input" id="fLocation" placeholder="Poland, Earth..."></div><div class="field"><label>PAGE TITLE</label><input class="input" id="fTitle" placeholder="your name • blurry."></div></div>
+<div class="field"><label>TYPEWRITER TEXTS (separate with |)</label><input class="input" id="fTypewriter" placeholder="welcome to my page | just chilling"></div>
+<div class="switchrow">Animated page title <input class="switch" type="checkbox" id="fAnimatedTitle"></div>
+<div class="switchrow">Username glow <input class="switch" type="checkbox" id="fNameGlow"></div>
+<div class="field"><label>USERNAME EFFECT</label><select id="fNameEffect"><option value="none">None</option><option value="gradient">Gradient</option><option value="glitch">Glitch-style shadow</option><option value="pulse">Pulse</option></select></div>
+</div></div>
 
-      <div style="display:flex;align-items:center;justify-content:center;color:#85858f;font-size:12px;text-align:center;line-height:2">
-        <div>
-          <div style="font-size:35px;color:var(--accent);margin-bottom:10px">✳</div>
-          Your profile.<br>
-          Your personality.<br>
-          Your blurry.
-        </div>
-      </div>
-    </div>
-  </div>
+<div class="sectionbox"><div class="sectionhead">02 · Profile assets</div><div class="sectionbody">
+<div class="two"><div class="field"><label>AVATAR IMAGE</label><input class="input file" type="file" id="fAvatar" accept="image/*"></div><div class="field"><label>PROFILE BANNER</label><input class="input file" type="file" id="fBanner" accept="image/*"></div></div>
+<div class="two"><div class="field"><label>BACKGROUND IMAGE</label><input class="input file" type="file" id="fBackground" accept="image/*"></div><div class="field"><label>BACKGROUND VIDEO</label><input class="input file" type="file" id="fVideo" accept="video/mp4,video/webm"></div></div>
+<div class="two"><div class="field"><label>PROFILE AUDIO (MP3 / WAV)</label><input class="input file" type="file" id="fAudio" accept="audio/*"></div><div class="field"><label>CUSTOM CURSOR IMAGE</label><input class="input file" type="file" id="fCursor" accept="image/*"></div></div>
+<div class="field"><label>PROFILE BANNER / BACKGROUND POSITION</label><select id="fPosition"><option>center</option><option>top</option><option>bottom</option><option>left</option><option>right</option></select></div>
+</div></div>
+
+<div class="sectionbox"><div class="sectionhead">03 · Appearance & colors</div><div class="sectionbody">
+<div class="three">
+<div class="field"><label>ACCENT COLOR</label><input class="input" type="color" id="fAccent" value="#a78bfa"></div>
+<div class="field"><label>BACKGROUND COLOR</label><input class="input" type="color" id="fBg" value="#14141c"></div>
+<div class="field"><label>TEXT COLOR</label><input class="input" type="color" id="fText" value="#f5f5f8"></div>
+</div>
+<div class="two"><div class="field"><label>PROFILE LAYOUT</label><select id="fLayout"><option value="default">Default</option><option value="modern">Modern</option><option value="sleek">Sleek</option><option value="minimal">Minimal</option><option value="portfolio">Portfolio</option></select></div><div class="field"><label>BORDER RADIUS</label><input class="input" type="range" min="0" max="35" id="fRadius" value="15"></div></div>
+<div class="field"><label>PROFILE OPACITY</label><input class="range" type="range" min="45" max="100" id="fOpacity" value="100"></div>
+<div class="field"><label>PROFILE BLUR</label><input class="range" type="range" min="0" max="20" id="fBlur" value="0"></div>
+<div class="field"><label>GLOW INTENSITY</label><input class="range" type="range" min="0" max="50" id="fGlow" value="20"></div>
+<div class="switchrow">Profile gradient <input class="switch" type="checkbox" id="fGradient"></div>
+<div class="switchrow">Monochrome social icons <input class="switch" type="checkbox" id="fMono"></div>
+<div class="switchrow">Swap accent and widget colors <input class="switch" type="checkbox" id="fSwap"></div>
+<div class="switchrow">Show volume control <input class="switch" type="checkbox" id="fVolume" checked></div>
+</div></div>
+
+<div class="sectionbox"><div class="sectionhead">04 · Background effects</div><div class="sectionbody">
+<div class="field"><label>BACKGROUND EFFECT</label><select id="fEffect"><option value="none">None</option><option value="snow">Floating particles</option><option value="grid">Grid</option><option value="aurora">Aurora glow</option><option value="stars">Stars (subtle)</option></select></div>
+<div class="field"><label>EFFECT COLOR</label><input class="input" type="color" id="fEffectColor" value="#a78bfa"></div>
+<div class="field"><label>CUSTOM CSS CLASS (preview only)</label><input class="input" id="fCustomClass" placeholder="optional"></div>
+</div></div>
+
+<div class="sectionbox"><div class="sectionhead">05 · Social links</div><div class="sectionbody">
+<div class="sub" style="margin-bottom:12px">Add your socials or any custom URL. Use full links, e.g. https://instagram.com/name</div>
+<div id="linksEditor" class="links-list"></div><button class="btn" id="addLink" style="margin-top:12px">＋ Add link</button>
+</div></div>
+
+<div class="sectionbox"><div class="sectionhead">06 · Widgets & second tab</div><div class="sectionbody">
+<div class="switchrow">Enable second tab <input class="switch" type="checkbox" id="fSecondTab"></div>
+<div class="field"><label>WIDGET TYPE</label><select id="fWidget"><option value="none">No widget</option><option value="discord">Discord server / username</option><option value="youtube">YouTube channel</option><option value="spotify">Spotify</option><option value="github">GitHub</option><option value="twitch">Twitch</option><option value="roblox">Roblox</option><option value="telegram">Telegram</option><option value="weather">Weather (demo)</option><option value="about">About me card</option></select></div>
+<div class="field"><label>WIDGET VALUE / URL</label><input class="input" id="fWidgetValue" placeholder="Paste a link or write a value"></div>
+<div class="field"><label>SECOND TAB CONTENT</label><textarea id="fSecondContent" placeholder="Projects, skills, about me..."></textarea></div>
+</div></div>
+
+<div class="sectionbox"><div class="sectionhead">07 · Badges & extras</div><div class="sectionbody">
+<div class="field"><label>BADGES (separate with commas)</label><input class="input" id="fBadges" placeholder="OG, Creator, Developer"></div>
+<div class="switchrow">Show profile views <input class="switch" type="checkbox" id="fShowViews" checked></div>
+<div class="switchrow">Show join date <input class="switch" type="checkbox" id="fShowJoin" checked></div>
+<div class="switchrow">Show profile footer <input class="switch" type="checkbox" id="fFooter" checked></div>
+<div class="switchrow">Enable click-to-enter screen <input class="switch" type="checkbox" id="fEnter"></div>
+<div class="field"><label>ENTER SCREEN TEXT</label><input class="input" id="fEnterText" placeholder="click to enter..."></div>
+<div class="field"><label>PROFILE ALIAS (extra local nickname)</label><input class="input" id="fAlias" placeholder="anothername"></div>
+</div></div>
+
+<div class="sectionbox"><div class="sectionhead">08 · Metadata & privacy</div><div class="sectionbody">
+<div class="field"><label>META DESCRIPTION</label><textarea id="fMeta" placeholder="Short description for search engines"></textarea></div>
+<div class="field"><label>PREVIEW IMAGE URL</label><input class="input" id="fMetaImage" placeholder="https://..."></div>
+<div class="switchrow">Hide profile from local discovery <input class="switch" type="checkbox" id="fPrivate"></div>
+<div class="switchrow">Hide view counter <input class="switch" type="checkbox" id="fHideViews"></div>
+</div></div>
+<div class="row between"><button class="btn danger" id="deleteProfile">Delete profile</button><button class="btn primary" id="saveBottom">Save changes</button></div>
+</div>
+
+<div class="preview-sticky">
+<div class="row between" style="margin-bottom:10px"><b style="font-size:12px">LIVE PROFILE PREVIEW</b><span class="muted" style="font-size:10px">Updates as you edit</span></div>
+<div id="profilePreview" class="profile">
+<div class="cover" id="pCover"></div>
+<div class="profile-content">
+<div class="pavatar" id="pAvatar">b.</div>
+<div class="pname" id="pName">Your name</div><div class="puser" id="pUser">@username</div>
+<div class="pbio" id="pBio">Your bio will appear here.</div>
+<div class="badges" id="pBadges"></div>
+<div class="pstats" id="pStats"><span><b id="pViews">0</b> views</span><span>blurry. member</span></div>
+<div class="socials" id="pLinks"></div>
+<div class="widget hidden" id="pWidget"></div>
+<div class="tabbar hidden" id="pTabs"><button class="active" data-tab="main">Main</button><button data-tab="second">More</button></div>
+<div class="pbio hidden" id="pSecond"></div>
+<audio id="pAudio" class="audio hidden" controls></audio>
+</div><div class="profile-footer" id="pFooter">POWERED BY BLURRY.</div>
+</div>
+<div class="card" style="margin-top:12px"><div class="sub">Profile URL preview</div><div style="font-size:13px;font-weight:800;margin-top:6px" id="urlPreview">blurry.local/@username</div><div class="hint">Local demo URL — not a public address yet.</div></div>
+</div>
+</div>
 </section>
 
-<section class="section" id="about" style="text-align:center;padding-top:20px;padding-bottom:90px">
-  <div style="font-size:13px;color:var(--accent);font-weight:700;margin-bottom:15px">WELCOME TO BLURRY.</div>
-  <div style="font-size:clamp(30px,5vw,52px);font-weight:900;letter-spacing:-2px">
-    Make the internet<br>feel a little more yours.
-  </div>
-  <p class="section-desc" style="max-width:430px;margin:18px auto">
-    A different kind of personal space.
-    Simple, creative and made for everyone.
-  </p>
-  <button class="btn primary" onclick="document.querySelector('#editor').scrollIntoView({behavior:'smooth'})">
-    Try the preview ↗
-  </button>
+<section class="page" id="page-discover">
+<div class="heading"><div><h1>Discover</h1><div class="sub">Explore profiles saved in this browser.</div></div></div>
+<input class="input searchbar" id="searchProfiles" placeholder="Search username or display name...">
+<div id="discoverList" class="grid three" style="margin-top:18px"></div>
+</section>
+
+<section class="page" id="page-templates">
+<div class="heading"><div><h1>Templates</h1><div class="sub">Apply a starting look to your selected profile.</div></div></div>
+<div class="grid three" id="templateGrid">
+<div class="template" data-template="midnight"><div class="template-art"></div><strong>Midnight</strong><small>Dark violet · clean</small></div>
+<div class="template" data-template="ice"><div class="template-art" style="background:linear-gradient(135deg,#18374a,#10151c,#47738c)"></div><strong>Ice</strong><small>Cold blue · minimal</small></div>
+<div class="template" data-template="rose"><div class="template-art" style="background:linear-gradient(135deg,#482337,#171117,#a34c75)"></div><strong>Rose</strong><small>Soft pink · glow</small></div>
+<div class="template" data-template="mono"><div class="template-art" style="background:linear-gradient(135deg,#333,#111,#777)"></div><strong>Monochrome</strong><small>Black & white</small></div>
+<div class="template" data-template="forest"><div class="template-art" style="background:linear-gradient(135deg,#1c4435,#101913,#527e5d)"></div><strong>Forest</strong><small>Green · calm</small></div>
+<div class="template" data-template="sunset"><div class="template-art" style="background:linear-gradient(135deg,#603b2d,#19121b,#d17a54)"></div><strong>Sunset</strong><small>Warm · orange</small></div>
+</div>
+</section>
+
+<section class="page" id="page-settings">
+<div class="heading"><div><h1>Settings</h1><div class="sub">Local demo preferences and data management.</div></div></div>
+<div class="card" style="max-width:650px">
+<b>Demo storage</b><p class="sub" style="margin:8px 0 16px">Your profiles are stored in this browser using localStorage. They are not uploaded to a server.</p>
+<div class="row"><button class="btn" id="exportData">Export profiles (JSON)</button><label class="btn">Import profiles<input type="file" id="importData" accept=".json,application/json" hidden></label><button class="btn danger" id="clearData">Delete all local data</button></div>
+<hr style="border:0;border-top:1px solid var(--line);margin:20px 0">
+<b>What is not connected yet</b><p class="sub" style="margin-top:8px">Real accounts, password recovery, cross-device sync, public profile URLs, real Discord presence, global search, real analytics and hosted media require a backend/API. The current demo simulates local profile editing and preview.</p>
+</div>
 </section>
 </main>
-
-<footer>
-  <div class="logo" style="font-size:22px;margin-bottom:12px">blurry<span>.</span></div>
-  <b>Your space on the internet.</b>
-  <div style="margin-top:12px">© 2026 blurry. All rights reserved.</div>
-</footer>
+</div>
+<div class="toast" id="toast"></div>
 
 <script>
-const nameInput = document.getElementById('nameInput');
-const handleInput = document.getElementById('handleInput');
-const bioInput = document.getElementById('bioInput');
+const KEY='blurry_demo_profiles_v1';
+let profiles=load(), current=null, draft=null, linkDraft=[];
+const $=id=>document.getElementById(id);
 
-function updatePreview(){
-  document.getElementById('previewName').textContent =
-    nameInput.value || 'Your name';
+function load(){try{return JSON.parse(localStorage.getItem(KEY)||'[]')}catch(e){return []}}
+function persist(){localStorage.setItem(KEY,JSON.stringify(profiles));renderAll()}
+function uid(){return Math.random().toString(36).slice(2,10)}
 
-  document.getElementById('previewHandle').textContent =
-    '@' + (handleInput.value.replace(/^@/,'') || 'username');
+function blankProfile(user){
+return {
+id:uid(),name:user||'New user',
+user:(user||'newuser').toLowerCase().replace(/[^a-z0-9_]/g,''),
+bio:'Welcome to my blurry. page.',location:'',title:'',typewriter:'',
+animatedTitle:false,nameGlow:false,nameEffect:'none',
+avatar:'',banner:'',background:'',video:'',audio:'',cursor:'',
+position:'center',accent:'#a78bfa',bg:'#14141c',text:'#f5f5f8',
+layout:'default',radius:15,opacity:100,blur:0,glow:20,
+gradient:false,mono:false,swap:false,volume:true,effect:'none',
+effectColor:'#a78bfa',customClass:'',
+links:[{label:'Instagram',url:'https://instagram.com/'},{label:'Discord',url:'https://discord.com/'},{label:'My website',url:'https://example.com'}],
+secondTab:false,widget:'none',widgetValue:'',secondContent:'A little more about me.',
+badges:['blurry member'],showViews:true,showJoin:true,footer:true,
+enter:false,enterText:'click to enter...',alias:'',meta:'',metaImage:'',
+private:false,hideViews:false,views:0,created:Date.now()
+}}
 
-  document.getElementById('previewBio').textContent =
-    bioInput.value || 'Your bio goes here.';
+function toast(t){
+$('toast').textContent=t;
+$('toast').classList.add('show');
+setTimeout(()=>$('toast').classList.remove('show'),2200)
 }
 
-[nameInput,handleInput,bioInput].forEach(input=>{
-  input.addEventListener('input',updatePreview);
+function page(p){
+document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
+$('page-'+p).classList.add('active');
+document.querySelectorAll('.navbtn').forEach(x=>x.classList.toggle('active',x.dataset.page===p));
+if(p==='editor')renderEditor();
+if(p==='discover')renderDiscover()
+}
+
+document.querySelectorAll('.navbtn').forEach(b=>b.onclick=()=>page(b.dataset.page));
+document.querySelectorAll('[data-goto]').forEach(b=>b.onclick=()=>page(b.dataset.goto));
+
+function create(){
+let u=prompt('Choose your profile username (demo):','newuser');
+if(u===null)return;
+u=u.trim().toLowerCase().replace(/[^a-z0-9_]/g,'');
+if(!u)return toast('Enter a valid username.');
+if(profiles.some(p=>p.user===u))return toast('This username already exists.');
+let p=blankProfile(u);
+profiles.unshift(p);current=p.id;draft=structuredClone(p);
+persist();page('editor');toast('Profile created!')
+}
+
+['topCreate','createBtn','quickCreate','profilesCreate','createFromEditor'].forEach(id=>$(id).onclick=create);
+
+function getCurrent(){return profiles.find(p=>p.id===current)}
+
+function renderAll(){
+$('statProfiles').textContent=profiles.length;
+$('statViews').textContent=profiles.reduce((a,b)=>a+(b.views||0),0);
+$('statLinks').textContent=profiles.reduce((a,b)=>a+(b.links||[]).length,0);
+$('statBadges').textContent=profiles.reduce((a,b)=>a+(b.badges||[]).length,0);
+
+let recent=profiles.slice(0,4);
+$('recentProfiles').innerHTML=recent.length?recent.map(profileRow).join(''):'<div class="empty">No profiles yet. Create your first one.</div>';
+
+$('profilesList').innerHTML=profiles.length?profiles.map(p=>`
+<div class="card profilecard">
+<div class="avatar-mini">${p.avatar?`<img src="${p.avatar}">`:esc(p.name.slice(0,1).toUpperCase())}</div>
+<div style="flex:1;min-width:0"><b>${esc(p.name)}</b><div class="sub">@${esc(p.user)} · ${p.links.length} links · ${p.views} views</div></div>
+<button class="btn" onclick="editProfile('${p.id}')">Edit</button>
+<button class="btn danger" onclick="removeProfile('${p.id}')">Delete</button>
+</div>`).join(''):'<div class="card empty">No profiles created yet.</div>';
+
+renderDiscover()
+}
+
+function profileRow(p){
+return `<div class="profile-mini" style="margin:13px 0">
+<div class="avatar-mini">${p.avatar?`<img src="${p.avatar}">`:esc(p.name.slice(0,1).toUpperCase())}</div>
+<div style="flex:1"><b>${esc(p.name)}</b><div class="sub">@${esc(p.user)}</div></div>
+<button class="btn" onclick="editProfile('${p.id}')">Edit ↗</button>
+</div>`
+}
+
+function esc(s){
+return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))
+}
+
+function editProfile(id){
+current=id;draft=structuredClone(profiles.find(p=>p.id===id));page('editor')
+}
+
+const fields=['name','user','bio','location','title','typewriter','animatedTitle','nameGlow','nameEffect','position','accent','bg','text','layout','radius','opacity','blur','glow','gradient','mono','swap','volume','effect','effectColor','customClass','secondTab','widget','widgetValue','secondContent','badges','showViews','showJoin','footer','enter','enterText','alias','meta','metaImage','private','hideViews'];
+
+const map={
+name:'fName',user:'fUser',bio:'fBio',location:'fLocation',title:'fTitle',
+typewriter:'fTypewriter',animatedTitle:'fAnimatedTitle',nameGlow:'fNameGlow',
+nameEffect:'fNameEffect',position:'fPosition',accent:'fAccent',bg:'fBg',
+text:'fText',layout:'fLayout',radius:'fRadius',opacity:'fOpacity',
+blur:'fBlur',glow:'fGlow',gradient:'fGradient',mono:'fMono',swap:'fSwap',
+volume:'fVolume',effect:'fEffect',effectColor:'fEffectColor',
+customClass:'fCustomClass',secondTab:'fSecondTab',widget:'fWidget',
+widgetValue:'fWidgetValue',secondContent:'fSecondContent',badges:'fBadges',
+showViews:'fShowViews',showJoin:'fShowJoin',footer:'fFooter',enter:'fEnter',
+enterText:'fEnterText',alias:'fAlias',meta:'fMeta',metaImage:'fMetaImage',
+private:'fPrivate',hideViews:'fHideViews'
+};
+
+function renderEditor(){
+let p=getCurrent();
+$('noProfile').classList.toggle('hidden',!p);
+$('editorContent').classList.toggle('hidden',!p);
+if(!p)return;
+draft=structuredClone(p);
+fields.forEach(k=>{
+let el=$(map[k]);
+if(k==='badges')el.value=(draft.badges||[]).join(', ');
+else if(el.type==='checkbox')el.checked=!!draft[k];
+else el.value=draft[k]??''
+});
+renderLinksEditor();updatePreview()
+}
+
+function collect(){
+fields.forEach(k=>{
+let el=$(map[k]);
+if(k==='badges')draft[k]=el.value.split(',').map(x=>x.trim()).filter(Boolean);
+else if(el.type==='checkbox')draft[k]=el.checked;
+else if(['radius','opacity','blur','glow'].includes(k))draft[k]=Number(el.value);
+else draft[k]=el.value
+});
+draft.links=linkDraft.map(x=>({...x}))
+}
+
+fields.forEach(k=>{
+let el=$(map[k]);
+el.addEventListener('input',()=>{if(!draft)return;collect();updatePreview()});
+el.addEventListener('change',()=>{if(!draft)return;collect();updatePreview()})
 });
 
-document.querySelectorAll('.color').forEach(button=>{
-  button.addEventListener('click',()=>{
-    document.querySelectorAll('.color').forEach(b=>b.classList.remove('active'));
-    button.classList.add('active');
-    document.documentElement.style.setProperty('--accent',button.dataset.color);
-  });
+function renderLinksEditor(){
+linkDraft=(draft.links||[]).map(x=>({...x}));
+$('linksEditor').innerHTML=linkDraft.map((l,i)=>`
+<div class="linkrow">
+<input class="input" placeholder="Label" value="${esc(l.label)}" data-link-label="${i}">
+<input class="input" placeholder="https://..." value="${esc(l.url)}" data-link-url="${i}">
+<button class="btn danger" data-remove-link="${i}">×</button>
+</div>`).join('');
+
+$('linksEditor').querySelectorAll('input').forEach(el=>el.oninput=()=>{
+let i=el.hasAttribute('data-link-label')?+el.dataset.linkLabel:+el.dataset.linkUrl;
+let k=el.hasAttribute('data-link-label')?'label':'url';
+linkDraft[i][k]=el.value;updatePreview()
 });
+
+$('linksEditor').querySelectorAll('[data-remove-link]').forEach(b=>b.onclick=()=>{
+linkDraft.splice(+b.dataset.removeLink,1);renderLinksEditor();updatePreview()
+})
+}
+
+$('addLink').onclick=()=>{
+linkDraft.push({label:'New link',url:'https://'});
+renderLinksEditor();updatePreview()
+};
+
+function updatePreview(){
+if(!draft)return;
+collect();
+let p=draft,el=$('profilePreview');
+document.documentElement.style.setProperty('--accent',p.accent);
+el.style.setProperty('--pbg',p.bg);
+el.style.color=p.text;
+el.style.borderRadius=p.radius+'px';
+el.style.opacity=p.opacity/100;
+el.style.backdropFilter=`blur(${p.blur}px)`;
+el.style.boxShadow=`0 15px ${30+p.glow}px ${p.accent}33`;
+el.style.background=p.gradient?`linear-gradient(145deg,${p.bg},${p.accent}30)`:p.bg;
+
+$('pName').textContent=p.name||'Your name';
+$('pName').style.color=p.nameGlow?p.accent:p.text;
+$('pName').style.textShadow=p.nameGlow?`0 0 18px ${p.accent}`:'none';
+$('pName').style.background=p.nameEffect==='gradient'?`linear-gradient(90deg,${p.accent},white)`:'';
+$('pName').style.webkitBackgroundClip=p.nameEffect==='gradient'?'text':'';
+$('pUser').textContent='@'+(p.user||'username');
+$('pBio').textContent=p.bio||'Your bio will appear here.';
+$('pAvatar').innerHTML=p.avatar?`<img src="${p.avatar}">`:esc((p.name||'b').slice(0,1).toUpperCase());
+$('pAvatar').style.borderRadius=p.layout==='sleek'?'20px':'50%';
+$('pCover').style.backgroundImage=p.banner?`url("${p.banner}")`:p.background?`url("${p.background}")`:'';
+$('pCover').style.backgroundPosition=p.position;
+$('pBadges').innerHTML=(p.badges||[]).map(b=>`<span class="badge">${esc(b)}</span>`).join('');
+$('pStats').classList.toggle('hidden',p.hideViews);
+$('pViews').textContent=p.views||0;
+$('pFooter').classList.toggle('hidden',!p.footer);
+
+$('pLinks').innerHTML=(p.links||[]).map(l=>`
+<a class="social" href="${safeUrl(l.url)}" target="_blank" rel="noopener">
+<span>${esc(l.label||'Link')}</span><span>↗</span></a>`).join('');
+
+$('pWidget').classList.toggle('hidden',p.widget==='none');
+$('pWidget').textContent=p.widget==='none'?'':`${p.widget.toUpperCase()} · ${p.widgetValue||'Widget preview'}`;
+$('pTabs').classList.toggle('hidden',!p.secondTab);
+$('pSecond').classList.add('hidden');
+
+$('pTabs').querySelectorAll('button').forEach(b=>b.onclick=()=>{
+$('pTabs').querySelectorAll('button').forEach(x=>x.classList.toggle('active',x===b));
+$('pBio').classList.toggle('hidden',b.dataset.tab==='second');
+$('pLinks').classList.toggle('hidden',b.dataset.tab==='second');
+$('pSecond').classList.toggle('hidden',b.dataset.tab!=='second');
+$('pSecond').textContent=p.secondContent
+});
+
+$('pAudio').classList.toggle('hidden',!p.audio);
+if(p.audio)$('pAudio').src=p.audio;
+$('pAudio').controls=p.volume;
+$('urlPreview').textContent='blurry.local/@'+(p.user||'username');
+
+document.body.classList.remove('fx-snow','fx-grid');
+if(p.effect==='snow')document.body.classList.add('fx-snow');
+if(p.effect==='grid')document.body.classList.add('fx-grid')
+}
+
+function safeUrl(u){
+try{let x=new URL(u);return ['http:','https:'].includes(x.protocol)?x.href:'#'}
+catch(e){return '#'}
+}
+
+function save(){
+if(!draft)return;
+collect();
+if(!draft.user||!/^[a-z0-9_]{2,24}$/.test(draft.user))return toast('Username: 2–24 characters, a-z, 0-9 or _.');
+if(profiles.some(p=>p.user===draft.user&&p.id!==draft.id))return toast('Username already taken.');
+let i=profiles.findIndex(p=>p.id===draft.id);
+if(i>=0)profiles[i]=structuredClone(draft);
+persist();toast('Changes saved locally ✓')
+}
+
+$('saveProfile').onclick=save;
+$('saveBottom').onclick=save;
+
+$('discard').onclick=()=>{
+if(current){draft=structuredClone(getCurrent());renderEditor();toast('Preview reset.')}
+};
+
+$('deleteProfile').onclick=()=>{
+if(!current)return;
+if(confirm('Delete this local profile?')){
+profiles=profiles.filter(p=>p.id!==current);
+current=null;draft=null;persist();renderEditor();toast('Profile deleted.')
+}
+};
+
+function removeProfile(id){
+if(confirm('Delete this profile?')){
+profiles=profiles.filter(p=>p.id!==id);
+if(current===id){current=null;draft=null}
+persist();renderAll()
+}
+}
+
+$('fAvatar').onchange=e=>readFile(e,'avatar');
+$('fBanner').onchange=e=>readFile(e,'banner');
+$('fBackground').onchange=e=>readFile(e,'background');
+$('fVideo').onchange=e=>readFile(e,'video');
+$('fAudio').onchange=e=>readFile(e,'audio');
+$('fCursor').onchange=e=>readFile(e,'cursor');
+
+function readFile(e,key){
+let f=e.target.files[0];
+if(!f)return;
+if(f.size>2*1024*1024){
+toast('Demo limit: choose a file under 2 MB.');
+e.target.value='';return
+}
+let r=new FileReader();
+r.onload=()=>{
+draft[key]=r.result;
+updatePreview();
+toast('Asset loaded into preview. Save changes to keep it.')
+};
+r.readAsDataURL(f)
+}
+
+function renderDiscover(){
+let q=($('searchProfiles')?.value||'').toLowerCase();
+let arr=profiles.filter(p=>!p.private&&(p.user+' '+p.name).toLowerCase().includes(q));
+$('discoverList').innerHTML=arr.length?arr.map(p=>`
+<div class="card profilecard">
+<div class="avatar-mini">${p.avatar?`<img src="${p.avatar}">`:esc(p.name.slice(0,1))}</div>
+<div style="min-width:0"><b>${esc(p.name)}</b><div class="sub">@${esc(p.user)}</div></div>
+</div>`).join(''):'<div class="card empty" style="grid-column:1/-1">No profiles found. Create a profile to see it here.</div>'
+}
+
+$('searchProfiles').oninput=renderDiscover;
+
+document.querySelectorAll('.template').forEach(t=>t.onclick=()=>{
+if(!current)return toast('Create or select a profile first.');
+let themes={
+midnight:['#a78bfa','#14141c'],
+ice:['#8bd5ff','#101a22'],
+rose:['#f18bb9','#21131b'],
+mono:['#ffffff','#151515'],
+forest:['#8bdbab','#101b15'],
+sunset:['#ffad7a','#211612']
+};
+let c=themes[t.dataset.template];
+draft.accent=c[0];draft.bg=c[1];
+renderEditor();
+toast(t.querySelector('strong').textContent+' template applied. Save it!')
+});
+
+$('exportData').onclick=()=>{
+let blob=new Blob([JSON.stringify(profiles,null,2)],{type:'application/json'});
+let a=document.createElement('a');
+a.href=URL.createObjectURL(blob);
+a.download='blurry-profiles.json';
+a.click();
+URL.revokeObjectURL(a.href)
+};
+
+$('importData').onchange=e=>{
+let f=e.target.files[0];if(!f)return;
+let r=new FileReader();
+r.onload=()=>{
+try{
+let d=JSON.parse(r.result);
+if(!Array.isArray(d))throw 0;
+profiles=d;current=null;persist();toast('Profiles imported.')
+}catch(x){toast('Invalid JSON file.')}
+};
+r.readAsText(f)
+};
+
+$('clearData').onclick=()=>{
+if(confirm('Delete ALL locally saved blurry. profiles?')){
+profiles=[];current=null;draft=null;
+localStorage.removeItem(KEY);
+renderAll();renderEditor();toast('Local data cleared.')
+}
+};
+
+renderAll();
+renderEditor();
 </script>
 </body>
 </html>
